@@ -21,7 +21,6 @@ export default function Home() {
         settodo("")
     }
     useEffect(() => {
-
     }, [data])
     return (
         <div>
