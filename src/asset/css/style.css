@@ -1,3 +1,9 @@
 .input-validate {
-    border-bottom: 2px solid red!important;
+    border-bottom: 2px solid red !important;
+}
+
+.li-div {
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-column-gap: .5rem;
 }
