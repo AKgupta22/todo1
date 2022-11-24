@@ -10,12 +10,22 @@ export default function Home() {
     }
 
     ])
+    const [todo, settodo] = useState("")
+    const PostData = (e) => {
+        e.preventDefault()
+        const newdata = [...data, {
+            "task": todo,
+            "status": "pending"
+        }]
+        setdata(newdata)
+        settodo("")
+    }
     useEffect(() => {
 
     }, [data])
     return (
         <div>
-            <div className="container mt-2">
+            <div className="container-fluid mt-2">
                 <h2>Todo List</h2>
                 <ul className="list-group w-100 mt-2">
                     {
@@ -30,6 +40,13 @@ export default function Home() {
                         })
                     }
                 </ul>
+                <form className='mt-2' onSubmit={PostData}>
+                    <div class="mb-3">
+                        <label class="form-label">Todo</label>
+                        <input type="text" class="form-control" placeholder="Create your Todo" onChange={(e) => settodo(e.target.value)} value={todo} />
+                    </div>
+                    <button type='sumbit' className='btn btn-primary'>Submit</button>
+                </form>
             </div>
         </div>
     )
