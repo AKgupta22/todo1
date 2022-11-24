@@ -11,15 +11,27 @@ export default function Home() {
 
     ])
     const [todo, settodo] = useState("")
+
+
     const PostData = (e) => {
+        const box = document.getElementById('todoinput')
         e.preventDefault()
-        const newdata = [...data, {
-            "task": todo,
-            "status": "pending"
-        }]
-        setdata(newdata)
-        settodo("")
+        if (todo.length > 0) {
+            box.classList.remove('input-validate')
+            const newdata = [...data, {
+                "task": todo,
+                "status": "pending"
+            }]
+            setdata(newdata)
+            settodo("")
+        }
+        else {
+            box.classList.add('input-validate')
+        }
     }
+
+
+
     useEffect(() => {
     }, [data])
     return (
@@ -40,9 +52,9 @@ export default function Home() {
                     }
                 </ul>
                 <form className='mt-2' onSubmit={PostData}>
-                    <div class="mb-3">
-                        <label class="form-label">Todo</label>
-                        <input type="text" class="form-control" placeholder="Create your Todo" onChange={(e) => settodo(e.target.value)} value={todo} />
+                    <div className="mb-3">
+                        <label className="form-label">Todo</label>
+                        <input type="text" id='todoinput' className="form-control" placeholder="Create your Todo" onChange={(e) => settodo(e.target.value)} value={todo} />
                     </div>
                     <button type='sumbit' className='btn btn-primary'>Submit</button>
                 </form>
