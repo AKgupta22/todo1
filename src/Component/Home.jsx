@@ -67,7 +67,7 @@ export default function Home() {
                     todo={todo}
                     setTodo={setTodo}
                 />
-                {data.length > 0 ? <div>< div className="mt2">
+                {todolist.length > 0 ? <div>< div className="mt2">
                     <h2 className='mt-2'>Filter Todo</h2>
                     <FilterBar Filter={Filter} />
                 </div>

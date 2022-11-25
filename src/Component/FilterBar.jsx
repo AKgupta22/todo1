@@ -3,7 +3,7 @@ import React from 'react'
 export default function FilterBar({Filter}) {
   return (
     <>
-    <div className="d-flex justify-content-between">
+    <div className="d-flex justify-content-between filterbar">
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => Filter("All")} defaultChecked />
                             <label className="form-check-label" for="flexRadioDefault1">
