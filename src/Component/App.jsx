@@ -4,9 +4,12 @@ import Home from './Home'
 import Navbar from './Navbar'
 import '../asset/css/style.css'
 export default function App() {
+    if (!localStorage.getItem("todo")) {
+        localStorage.setItem("todo", JSON.stringify([]))
+    }
     return (
         <BR>
-         <Navbar/>
+            <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
             </Routes>
