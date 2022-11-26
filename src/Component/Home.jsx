@@ -16,7 +16,8 @@ export default function Home() {
     }
     setTodolist(JSON.parse(localStorage.getItem("todo")));
     setData(JSON.parse(localStorage.getItem("todo")));
-  }, [localStorage.getItem("todo")]);
+  },[localStorage.getItem("todo")]);
+
   const postData = (e) => {
     const Regex = new RegExp("[a-zA-Z0-9]{1,}");
     e.preventDefault();
@@ -39,18 +40,21 @@ export default function Home() {
       setInputclass("form-control input-validate");
     }
   };
+
   const marked = (i) => {
     let newtodo = [...data];
     newtodo[i].status = newtodo[i].status === "done" ? "pending" : "done";
     localStorage.setItem("todo", JSON.stringify(newtodo));
     setData(newtodo);
   };
+
   const deleteTodo = (i) => {
     let newtodo = [...data];
     newtodo = newtodo.filter((todo, index) => index !== i);
     localStorage.setItem("todo", JSON.stringify(newtodo));
     setData(newtodo);
   };
+
   const editTodo = (i) => {
     let newtodo = [...data];
     newtodo[i].task = editvalue === "" ? newtodo[i].task : editvalue;
@@ -58,6 +62,7 @@ export default function Home() {
     setData(newtodo);
     setEditable(-1);
   };
+
   const filter = (item) => {
     let newtodo = [...todolist];
     if (item === "done")
@@ -67,45 +72,44 @@ export default function Home() {
     else newtodo = todolist;
     setData(newtodo);
   };
+
   return (
-    <div>
-      <div className="container-fluid mt-2">
-        <AddBar
-          postData={postData}
-          inputclass={inputclass}
-          todo={todo}
-          setTodo={setTodo}
-        />
-        {todolist?.length > 0 ? (
-          <div>
-            <div className="mt2">
-              <h2 className="mt-2">Filter Todo</h2>
-              <FilterBar filter={filter} />
-            </div>
-            <h2 className="mt-2">Todo List</h2>
+    <div className="container-fluid mt-2">
+      <AddBar
+        postData={postData}
+        inputclass={inputclass}
+        todo={todo}
+        setTodo={setTodo}
+      />
+      {todolist?.length > 0 ? (
+        <div>
+          <div className="mt2">
+            <h2 className="mt-2">Filter Todo</h2>
+            <FilterBar filter={filter} />
           </div>
-        ) : (
-          ""
-        )}
-        <ul className="list-group w-100 mt-2">
-          {data?.map((item, i) => {
-            return (
-              <div key={i} className="li-div">
-                <TodoItems
-                  editable={editable}
-                  item={item}
-                  i={i}
-                  editTodo={editTodo}
-                  setEditable={setEditable}
-                  marked={marked}
-                  deleteTodo={deleteTodo}
-                  setEditvalue={setEditvalue}
-                />
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+          <h2 className="mt-2">Todo List</h2>
+        </div>
+      ) : (
+        ""
+      )}
+      <ul className="list-group w-100 mt-2">
+        {data?.map((item, i) => {
+          return (
+            <div key={i} className="li-div">
+              <TodoItems
+                editable={editable}
+                item={item}
+                i={i}
+                editTodo={editTodo}
+                setEditable={setEditable}
+                marked={marked}
+                deleteTodo={deleteTodo}
+                setEditvalue={setEditvalue}
+              />
+            </div>
+          );
+        })}
+      </ul>
     </div>
   );
 }
