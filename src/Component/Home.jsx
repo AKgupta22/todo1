@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FilterBar from "./Generic/FilterBar";
 import AddBar from "./Generic/AddBar";
 import TodoItems from "./Generic/TodoItems";
+
 export default function Home() {
   let [todolist, setTodolist] = useState([]);
   const [data, setData] = useState([]);

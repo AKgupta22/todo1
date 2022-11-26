@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 export default function AddBar({ postData, inputclass, todo, setTodo }) {
   return (
     <form className="mt-2" onSubmit={postData}>

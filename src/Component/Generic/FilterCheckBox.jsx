@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 export default function FilterCheckBox(props) {
   return (
     <div className="form-check">

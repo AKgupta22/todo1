@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FilterCheckBox from "./FilterCheckBox";
+
 export default function FilterBar({ filter }) {
   return (
     <div className="d-flex justify-content-between filterbar">
