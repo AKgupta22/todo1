@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
-import FilterBar from "./FilterBar";
-import AddBar from "./AddBar";
-import TodoItems from "./TodoItems";
+import FilterBar from "./Generic/FilterBar";
+import AddBar from "./Generic/AddBar";
+import TodoItems from "./Generic/TodoItems";
 export default function Home() {
-  let todolist = JSON.parse(localStorage.getItem("todo"));
-  const [data, setData] = useState();
+  let [todolist, setTodolist] = useState([]);
+  const [data, setData] = useState([]);
   const [todo, setTodo] = useState("");
   const [editable, setEditable] = useState(-1);
   const [editvalue, setEditvalue] = useState("");
   const [inputclass, setInputclass] = useState("form-control");
+
+  useEffect(() => {
+    if (!localStorage.getItem("todo")) {
+      localStorage.setItem("todo", JSON.stringify([]));
+    }
+    setTodolist(JSON.parse(localStorage.getItem("todo")));
+    setData(JSON.parse(localStorage.getItem("todo")));
+  }, [localStorage.getItem("todo")]);
   const postData = (e) => {
     const Regex = new RegExp("[a-zA-Z0-9]{1,}");
     e.preventDefault();
@@ -59,10 +67,6 @@ export default function Home() {
     else newtodo = todolist;
     setData(newtodo);
   };
-
-  useEffect(() => {
-    setData(todolist);
-  }, []);
   return (
     <div>
       <div className="container-fluid mt-2">
@@ -72,7 +76,7 @@ export default function Home() {
           todo={todo}
           setTodo={setTodo}
         />
-        {todolist.length > 0 ? (
+        {todolist?.length > 0 ? (
           <div>
             <div className="mt2">
               <h2 className="mt-2">Filter Todo</h2>

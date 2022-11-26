@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "./Button";
 import PropTypes from "prop-types";
+import Badge from "./Badge";
+import ListCheckBox from "./ListCheckBox";
+import ListForm from "./ListForm";
 export default function TodoItems({
   editable,
   item,
@@ -16,45 +19,22 @@ export default function TodoItems({
       <li className="list-group-item d-flex justify-content-between align-items-start">
         <div className="ms-2 me-auto">
           {editable !== i ? (
-            <div>
-              <input
-                className="form-check-input me-1"
-                type="checkbox"
-                value=""
-                id={`${i}CheckboxStretched`}
-                checked={item.status === "done" ? true : false}
-                onChange={() => marked(i)}
-              />
-              <label
-                className="form-check-label stretched-link"
-                for={`${i}CheckboxStretched`}
-              >
-                {item.task}
-              </label>
-            </div>
+            <ListCheckBox item={item} marked={marked} i={i} />
           ) : (
             ""
           )}
         </div>
         {editable === i ? (
-          <form className="w-100" onSubmit={() => editTodo(i)}>
-            {" "}
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={item.task}
-              required
-              onChange={(E) => setEditvalue(E.target.value)}
-            />
-          </form>
+          <ListForm
+            editTodo={editTodo}
+            i={i}
+            item={item}
+            setEditvalue={setEditvalue}
+          />
         ) : (
           ""
         )}
-        {item.status === "done" ? (
-          <span className="badge bg-secondary mx-3">Completed</span>
-        ) : (
-          ""
-        )}
+        {item.status === "done" ? <Badge text="Completed" /> : ""}
       </li>
       <div className="d-flex justify-content-between">
         <Button
